@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Flex, Text, Button, HStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { CiSquarePlus } from 'react-icons/ci';
-import { useColorMode } from '@chakra-ui/react';
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 import { IoMoon } from 'react-icons/io5';
 import { LuSun } from 'react-icons/lu';
 
