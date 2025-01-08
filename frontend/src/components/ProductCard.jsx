@@ -30,7 +30,7 @@ const ProductCard = ({ product }) => {
   const textColor = useColorModeValue('gray.600, gray.200');
   const bg = useColorModeValue('white, gray.800');
 
-  const { deleteProduct } = useProductStore();
+  const { deleteProduct, updateProduct } = useProductStore();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -52,6 +52,27 @@ const ProductCard = ({ product }) => {
       });
     }
   };
+
+  const handleUpdateProduct = async (pid, updatedProduct) => {
+    const { success, message } = await updateProduct(pid, updatedProduct);
+    onClose();
+    if (!success) {
+      toast({
+        title: 'Error',
+        description: message,
+        status: 'error',
+        isClosable: true,
+      });
+    } else {
+      toast({
+        title: 'Success',
+        description: 'Product updated successfully',
+        status: 'success',
+        isClosable: true,
+      });
+    }
+  };
+
   return (
     <Box
       shadow="lg"
@@ -125,7 +146,11 @@ const ProductCard = ({ product }) => {
             </VStack>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={() => handleUpdateProduct(product._id, updatedProduct)}
+            >
               Update
             </Button>
             <Button variant="ghost" onClick={onClose}>
